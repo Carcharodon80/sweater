@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Greeting started</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div>
+    <form method="post" action="addMessage">
+        <input type="text" name="text" placeholder="Input text"/>
+        <input type="text" name="tag" placeholder="Input tag"/>
+        <button type="submit">Add message</button>
+    </form>
+</div>
+<h1>Список сообщений</h1>
+<div>
+    <form method="post" action="filter">
+        <input type="text" name="filter" placeholder="Input filter Tag">
+        <button type="submit">Найти</button>
+    </form>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Text</th>
+        <th scope="col">Tag</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="message: ${messages}">
+        <td th:text="${message.id}"/>
+        <td th:text="${message.text}"/>
+        <th th:text="${message.tag}"/>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

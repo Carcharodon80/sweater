@@ -1,4 +1,4 @@
-package com.carcharodon80.sweater;
+package com.carcharodon80.sweater.controller;
 
 import com.carcharodon80.sweater.domain.Message;
 import com.carcharodon80.sweater.repos.MessageRepository;
@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MessageController {
     @Autowired
     private MessageRepository messageRepository;
+
+    @GetMapping("/")
+    public String main() {
+        return "home";
+    }
 
     /**
      * Метод запускается, когда приходит Get-запрос на "messages" из браузера
@@ -46,7 +51,7 @@ public class MessageController {
      * @param model - модель для передачи сведений на страницу
      * @return - отображение messages.html
      */
-    @PostMapping("filter")
+    @PostMapping("/filter")
     public String filter(@RequestParam String filter, Model model) {
         Iterable<Message> messages;
         if (filter != null && !filter.isEmpty()) {

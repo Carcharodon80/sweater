@@ -1,7 +1,5 @@
 package com.carcharodon80.sweater.domain;
 
-
-
 import javax.persistence.*;
 
 /**

@@ -10,6 +10,7 @@
         <input type="text" name="text" placeholder="Input text"/>
         <input type="text" name="tag" placeholder="Input tag"/>
         <button type="submit">Add message</button>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     </form>
 </div>
 <h1>Список сообщений</h1>
@@ -17,6 +18,7 @@
     <form method="post" action="filter">
         <input type="text" name="filter" placeholder="Input filter Tag">
         <button type="submit">Найти</button>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     </form>
 </div>
 <table>

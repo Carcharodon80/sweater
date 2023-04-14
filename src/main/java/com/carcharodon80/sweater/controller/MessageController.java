@@ -1,8 +1,10 @@
 package com.carcharodon80.sweater.controller;
 
 import com.carcharodon80.sweater.domain.Message;
+import com.carcharodon80.sweater.domain.User;
 import com.carcharodon80.sweater.repos.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,8 +41,11 @@ public class MessageController {
      * @return - здесь redirect, чтобы при обновлении страницы не происходило повторное добавление сообщения в БД
      */
     @PostMapping("/addMessage")
-    public String addMessage(@RequestParam String text, @RequestParam String tag, Model model) {
-        Message message = new Message(text, tag);
+    public String addMessage(@AuthenticationPrincipal User user,
+            @RequestParam String text,
+            @RequestParam String tag,
+            Model model) {
+        Message message = new Message(text, tag, user);
         messageRepository.save(message);
         return "redirect:messages";
     }

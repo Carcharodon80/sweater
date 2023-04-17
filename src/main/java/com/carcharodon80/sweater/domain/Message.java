@@ -14,6 +14,8 @@ public class Message {
     private Integer id;
     private String text;
     private String tag;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private User author;
 
     public Message() {
@@ -55,5 +57,12 @@ public class Message {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    /**
+     * Метод нужен, чтобы корректно отображать имя пользователя на странице сообщений
+     */
+    public String getAuthorName() {
+        return author != null ? author.getUsername() : "none";
     }
 }

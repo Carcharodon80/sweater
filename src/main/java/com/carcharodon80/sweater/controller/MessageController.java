@@ -3,7 +3,6 @@ package com.carcharodon80.sweater.controller;
 import com.carcharodon80.sweater.domain.Message;
 import com.carcharodon80.sweater.domain.User;
 import com.carcharodon80.sweater.repos.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MessageController {
-    @Autowired
     private MessageRepository messageRepository;
+
+    public MessageController(MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+    }
 
     @GetMapping("/")
     public String main() {

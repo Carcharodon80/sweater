@@ -34,6 +34,7 @@
         <th scope="col">ID</th>
         <th scope="col">Text</th>
         <th scope="col">Tag</th>
+        <th scope="col">Author</th>
     </tr>
     </thead>
     <tbody>
@@ -41,6 +42,7 @@
         <td th:text="${message.id}"/>
         <td th:text="${message.text}"/>
         <th th:text="${message.tag}"/>
+        <th th:text="${message.getAuthorName}"/>
     </tr>
     </tbody>
 </table>

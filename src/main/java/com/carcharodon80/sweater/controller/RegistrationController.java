@@ -3,7 +3,6 @@ package com.carcharodon80.sweater.controller;
 import com.carcharodon80.sweater.domain.Role;
 import com.carcharodon80.sweater.domain.User;
 import com.carcharodon80.sweater.repos.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +12,11 @@ import java.util.Collections;
 
 @Controller
 public class RegistrationController {
-    @Autowired
     private UserRepository userRepository;
+
+    public RegistrationController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/registration")
     public String registration() {

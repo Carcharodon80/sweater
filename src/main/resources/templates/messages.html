@@ -22,10 +22,9 @@
 </div>
 <h1>Список сообщений</h1>
 <div>
-    <form method="post" action="filter">
-        <input type="text" name="filter" placeholder="Input filter Tag">
+    <form method="get" action="messages">
+        <input type="text" name="filter" th:value="${filter}">
         <button type="submit">Найти</button>
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     </form>
 </div>
 <table>

@@ -26,12 +26,19 @@ public class MessageController {
     /**
      * Метод запускается, когда приходит Get-запрос на "messages" из браузера
      * @param model - модель, куда передаются сведения для отображения страницы ("messages" понадобится на "messages.html")
+     * @param filter - фильтр тэгов
      * @return - имя страницы из resources/templates
      */
     @GetMapping("/messages")
-    public String showMessages(Model model) {
-        Iterable<Message> messages = messageRepository.findAll();
+    public String showMessages(@RequestParam (required = false, defaultValue = "") String filter, Model model) {
+        Iterable<Message> messages;
+        if (filter != null && !filter.isEmpty()) {
+            messages = messageRepository.findByTag(filter);
+        } else {
+            messages = messageRepository.findAll();
+        }
         model.addAttribute("messages", messages);
+        model.addAttribute("filter", filter);
         return "messages";
     }
 
@@ -50,23 +57,5 @@ public class MessageController {
         Message message = new Message(text, tag, user);
         messageRepository.save(message);
         return "redirect:messages";
-    }
-
-    /**
-     * Метод запускается, когда приходит post-запрос на "filter" (свойство action у кнопки в messages.html)
-     * @param filter - см. кнопку в messages.html
-     * @param model - модель для передачи сведений на страницу
-     * @return - отображение messages.html
-     */
-    @PostMapping("/filter")
-    public String filter(@RequestParam String filter, Model model) {
-        Iterable<Message> messages;
-        if (filter != null && !filter.isEmpty()) {
-            messages = messageRepository.findByTag(filter);
-        } else {
-            messages = messageRepository.findAll();
-        }
-        model.addAttribute("messages", messages);
-        return "messages";
     }
 }
